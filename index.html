@@ -496,8 +496,32 @@
         .location {
             color: var(--accent);
             font-weight: bold;
-            margin-bottom: 20px !important;
+            margin-bottom: 10px !important;
             font-size: 1.2rem;
+        }
+
+        /* تصميم زر الخريطة */
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 8px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .map-btn:hover {
+            background-color: #b5952f;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
+            color: var(--white);
         }
 
         .contact-links {
@@ -652,17 +676,17 @@
             <div class="feature-card">
                 <i class="fas fa-square-root-variable feature-icon"></i>
                 <h3>رياضيات</h3>
-                <p>Calculator &amp; Equations</p>
+                <p>Calculator & Equations</p>
             </div>
             <div class="feature-card">
                 <i class="fas fa-language feature-icon"></i>
                 <h3>إنجليزي</h3>
-                <p>Books &amp; ABC</p>
+                <p>Books & ABC</p>
             </div>
             <div class="feature-card">
                 <i class="fas fa-book-quran feature-icon"></i>
                 <h3>عربي</h3>
-                <p>القرآن &amp; الترد / Script</p>
+                <p>القرآن & الترد / Script</p>
             </div>
             <div class="feature-card">
                 <i class="fas fa-flask feature-icon"></i>
@@ -778,7 +802,12 @@
     </section>
 
     <footer>
-        <p class="location"><i class="fas fa-map-marker-alt"></i> الموقع: حي الميدان - منزل والدي عبد الحيدر العمور</p>
+        <p class="location"><i class="fas fa-map-marker-alt"></i> الموقع: حي الميدان - منزل والد عبد الحيدر العمور</p>
+        
+        <a href="https://maps.app.goo.gl/Lye37mbL7JwYiRRo8" target="_blank" rel="noopener noreferrer" class="map-btn">
+            <i class="fas fa-location-arrow"></i> الذهاب للمركز
+        </a>
+        
         <p>للتواصل والاستفسار عبر الرسائل المباشرة:</p>
         
         <div class="contact-links">
@@ -791,7 +820,7 @@
             </a>
         </div>
         
-        <p style="margin-top: 30px; font-size: 0.95rem; color: #888;">جميع الحقوق محفوظة &copy; 2026 | الأستاذة بتول عبد العمور</p>
+        <p style="margin-top: 30px; font-size: 0.95rem; color: #888;">جميع الحقوق محفوظة © 2026 | الأستاذة بتول عبد العمور</p>
     </footer>
 
     <script>
