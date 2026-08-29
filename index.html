@@ -107,18 +107,22 @@
         /* ================= القسم الرئيسي (Hero Section) ================= */
         .hero {
             display: flex;
+            flex-direction: column; /* جعل الصورة فوق والنصوص تحت */
             align-items: center;
             justify-content: center;
-            flex-wrap: wrap-reverse;
-            padding: 6rem 5%;
-            gap: 4rem;
-            background: linear-gradient(135deg, #eee5f0 0%, var(--light-bg) 100%);
-            min-height: 80vh;
+            padding: 3rem 5%;
+            gap: 3rem;
+            background: linear-gradient(135deg, #f5f0f6 0%, var(--light-bg) 100%);
+            min-height: auto; 
         }
 
         .hero-text {
-            flex: 1;
-            min-width: 300px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center; /* توسيط النصوص لأنها أصبحت تحت الصورة */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .hero-text h1 {
@@ -145,10 +149,13 @@
         .qualifications {
             background-color: var(--white);
             padding: 15px 20px;
-            border-right: 5px solid var(--accent);
+            border: 2px solid var(--accent); /* تغيير الحدود لتناسب التوسيط */
             border-radius: 10px;
             margin-bottom: 2.5rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
         }
 
         .qualifications p {
@@ -187,24 +194,25 @@
         .btn i { margin-left: 10px; }
 
         .hero-image {
-            flex: 1;
+            width: 100%;
+            max-width: 1000px; /* عرض كبير لاستيعاب الصورة العرضية بوضوح */
             display: flex;
             justify-content: center;
-            min-width: 300px;
+            order: -1; /* جعل الصورة تظهر أولاً في الأعلى */
         }
 
         .profile-img {
-            width: clamp(280px, 40vw, 400px);
-            height: clamp(280px, 40vw, 400px);
-            border-radius: 20px; 
-            object-fit: cover;
-            border: 8px solid var(--white);
-            box-shadow: 0 0 0 5px var(--accent), 0 20px 40px rgba(0,0,0,0.15);
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            height: auto; /* الحفاظ على نسبة الأبعاد الأصلية للصورة */
+            border-radius: 15px; 
+            object-fit: contain;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: transform 0.4s ease;
+            border: 4px solid var(--accent);
         }
-
+        
         .profile-img:hover {
-            transform: scale(1.03) rotate(2deg);
+            transform: scale(1.02);
         }
 
         /* ================= قسم المواد الدراسية (مربعات) ================= */
@@ -236,9 +244,9 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
             gap: 1.5rem;
-            max-width: 700px; 
+            max-width: 800px; 
             margin: 0 auto; 
         }
 
@@ -286,8 +294,8 @@
 
         .booking-container {
             background: var(--white);
-            padding: 3.5rem;
-            border-radius: 30px;
+            padding: clamp(1.5rem, 5vw, 3.5rem);
+            border-radius: 20px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.4);
             width: 100%;
             max-width: 800px;
@@ -322,7 +330,7 @@
 
         .form-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
         }
 
@@ -386,8 +394,8 @@
         
         .pill-group.subjects-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
         }
 
         .pill-group input[type="radio"],
@@ -527,10 +535,17 @@
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* ================= التوافق مع الشاشات الصغيرة ================= */
+        /* ================= التوافق مع الشاشات (Responsive) ================= */
+        @media (max-width: 992px) {
+            .hero-text h1 { font-size: 2.5rem; }
+            .booking-section { padding: 4rem 5%; }
+        }
+
         @media (max-width: 768px) {
-            .hero { text-align: center; padding: 4rem 5%; gap: 2rem; }
-            .qualifications { text-align: right; }
+            .hero { text-align: center; padding: 2rem 5%; gap: 2rem; flex-direction: column; }
+            .hero-text { display: flex; flex-direction: column; align-items: center; }
+            .qualifications { text-align: center; width: 100%; max-width: 100%; }
+            
             .menu-toggle { display: block; }
             .nav-links {
                 flex-direction: column; position: absolute; top: 100%; left: 0;
@@ -542,24 +557,29 @@
             .nav-links li { text-align: center; }
             .nav-links a { display: block; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
             .nav-links a::after { display: none; }
-            .booking-container { padding: 2.5rem 1.5rem; }
-            .form-grid { grid-template-columns: 1fr; gap: 1rem;}
+            
+            .features-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            
             .contact-links { flex-direction: column; gap: 15px; }
             .contact-btn { width: 100%; justify-content: center; }
         }
         
-        /* توافق المربعات مع الشاشات الصغيرة جداً */
-        @media (max-width: 500px) {
-            /* إبقاء المربعات كعمودين في الجوال للمواد الدراسية وقسم التسجيل إذا كانت صغيرة، أو جعلها عمود واحد حسب الرغبة */
-            /* جعلناها هنا عمودين أيضاً في الجوال لتبقى شكل المربعات جميلاً */
-            .features-grid, .pill-group.subjects-grid { 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 10px;
-            }
+        @media (max-width: 480px) {
+            .hero-text h1 { font-size: 2rem; }
+            .hero-text h2 { font-size: 1.2rem; }
+            
+            .features-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
             .feature-card { padding: 1rem; }
-            .feature-card h3, .pill-group.subjects-grid label { font-size: 1.1rem; }
-            .feature-icon, .pill-group.subjects-grid label i { font-size: 2rem; }
-            .pill-group:not(.subjects-grid) { flex-direction: column; }
+            .feature-card h3 { font-size: 1.2rem; }
+            .feature-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+            
+            .form-section-title { font-size: 1.1rem; }
+            .pill-group { flex-direction: column; width: 100%; }
+            .pill-group label { width: 100%; justify-content: center; }
+            
+            .pill-group.subjects-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; flex-direction: row; }
+            .pill-group.subjects-grid label { padding: 15px 10px; font-size: 1rem; gap: 10px; }
+            .pill-group.subjects-grid label i { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -578,6 +598,9 @@
     </nav>
 
     <section id="home" class="hero reveal">
+        <div class="hero-image">
+            <img src="https://cdn.phototourl.com/free/2026-08-29-9213e610-5c7a-49aa-8fdb-582a43d22e0f.png" alt="إعلان التدريس الخصوصي - أ. بتول عبد العمور" class="profile-img">
+        </div>
         <div class="hero-text">
             <h2>تكملة مسيرتي في التدريس الخصوصي</h2>
             <h1>الأستاذة بتول عبد العمور</h1>
@@ -591,9 +614,6 @@
             </div>
 
             <a href="#booking" class="btn"> احجز مقعداً الآن <i class="fas fa-pen-nib"></i></a>
-        </div>
-        <div class="hero-image">
-            <img src="https://via.placeholder.com/500x500.png?text=صورة+الإعلان+هنا" alt="إعلان التدريس الخصوصي" class="profile-img">
         </div>
     </section>
 
