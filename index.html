@@ -107,7 +107,7 @@
         /* ================= القسم الرئيسي (Hero Section) ================= */
         .hero {
             display: flex;
-            flex-direction: column; /* جعل الصورة فوق والنصوص تحت */
+            flex-direction: column; 
             align-items: center;
             justify-content: center;
             padding: 3rem 5%;
@@ -119,7 +119,7 @@
         .hero-text {
             width: 100%;
             max-width: 800px;
-            text-align: center; /* توسيط النصوص لأنها أصبحت تحت الصورة */
+            text-align: center; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -149,7 +149,7 @@
         .qualifications {
             background-color: var(--white);
             padding: 15px 20px;
-            border: 2px solid var(--accent); /* تغيير الحدود لتناسب التوسيط */
+            border: 2px solid var(--accent);
             border-radius: 10px;
             margin-bottom: 2.5rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
@@ -195,15 +195,15 @@
 
         .hero-image {
             width: 100%;
-            max-width: 1000px; /* عرض كبير لاستيعاب الصورة العرضية بوضوح */
+            max-width: 1000px; 
             display: flex;
             justify-content: center;
-            order: -1; /* جعل الصورة تظهر أولاً في الأعلى */
+            order: -1; 
         }
 
         .profile-img {
             width: 100%;
-            height: auto; /* الحفاظ على نسبة الأبعاد الأصلية للصورة */
+            height: auto; 
             border-radius: 15px; 
             object-fit: contain;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
@@ -558,7 +558,9 @@
             .nav-links a { display: block; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
             .nav-links a::after { display: none; }
             
-            .features-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .features { padding: 4rem 3%; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .feature-card { aspect-ratio: auto; min-height: 180px; padding: 1.2rem 0.5rem; }
             
             .contact-links { flex-direction: column; gap: 15px; }
             .contact-btn { width: 100%; justify-content: center; }
@@ -568,18 +570,42 @@
             .hero-text h1 { font-size: 2rem; }
             .hero-text h2 { font-size: 1.2rem; }
             
-            .features-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-            .feature-card { padding: 1rem; }
-            .feature-card h3 { font-size: 1.2rem; }
-            .feature-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+            .features { padding: 3rem 10px; } /* تقليل الهوامش الجانبية جداً لمنع الخروج عن الشاشة */
+            .features-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; }
+            
+            .feature-card { 
+                aspect-ratio: auto; /* إلغاء التقييد المربع لأنه يسبب الخروج عن الشاشة إذا كان النص طويلاً */
+                min-height: 150px; 
+                padding: 15px 5px; 
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            .feature-card h3 { font-size: 1.1rem; margin-bottom: 5px; }
+            .feature-icon { font-size: 2.2rem; margin-bottom: 8px; }
+            .feature-card p { font-size: 0.85rem; line-height: 1.4; word-wrap: break-word; }
             
             .form-section-title { font-size: 1.1rem; }
             .pill-group { flex-direction: column; width: 100%; }
             .pill-group label { width: 100%; justify-content: center; }
             
-            .pill-group.subjects-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; flex-direction: row; }
-            .pill-group.subjects-grid label { padding: 15px 10px; font-size: 1rem; gap: 10px; }
-            .pill-group.subjects-grid label i { font-size: 1.8rem; }
+            .pill-group.subjects-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; flex-direction: row; }
+            .pill-group.subjects-grid label { 
+                aspect-ratio: auto; /* إلغاء التقييد المربع هنا أيضاً */
+                min-height: 130px;
+                padding: 15px 5px; 
+                font-size: 0.9rem; 
+                gap: 8px; 
+                text-align: center;
+            }
+            .pill-group.subjects-grid label i { font-size: 2rem; }
+        }
+        
+        /* توافق للهواتف الصغيرة جداً (مثل iPhone SE) */
+        @media (max-width: 360px) {
+            .feature-card h3 { font-size: 1rem; }
+            .feature-card p { font-size: 0.75rem; }
+            .pill-group.subjects-grid label { font-size: 0.8rem; }
         }
     </style>
 </head>
