@@ -207,7 +207,7 @@
             transform: scale(1.03) rotate(2deg);
         }
 
-        /* ================= قسم المواد الدراسية ================= */
+        /* ================= قسم المواد الدراسية (مربعات) ================= */
         .features {
             padding: 5rem 5%;
             text-align: center;
@@ -237,14 +237,14 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr); 
-            gap: 2rem;
-            max-width: 800px; 
+            gap: 1.5rem;
+            max-width: 700px; 
             margin: 0 auto; 
         }
 
         .feature-card {
             background: var(--light-bg);
-            padding: 2.5rem 1.5rem;
+            padding: 1.5rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
             transition: var(--transition);
@@ -254,10 +254,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
         }
 
         .feature-card:hover {
-            transform: translateY(-15px);
+            transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
             border-bottom: 6px solid var(--accent);
             background: var(--white);
@@ -274,7 +275,7 @@
         .feature-card h3 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.8rem; }
         .feature-card p { color: #666; font-weight: 600; font-size: 1.1rem; }
 
-        /* ================= قسم التسجيل الحديث (التصميم الجديد) ================= */
+        /* ================= قسم التسجيل (التصميم الجديد بالمربعات) ================= */
         .booking-section {
             background: linear-gradient(135deg, var(--primary) 0%, #170f26 100%);
             padding: 6rem 5%;
@@ -289,7 +290,7 @@
             border-radius: 30px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.4);
             width: 100%;
-            max-width: 800px; /* توسيع النموذج قليلاً */
+            max-width: 800px;
         }
 
         .booking-container h2 {
@@ -306,7 +307,6 @@
             font-size: 1.1rem;
         }
 
-        /* فواصل الأقسام داخل النموذج */
         .form-section-title {
             width: 100%;
             font-size: 1.2rem;
@@ -365,7 +365,7 @@
         .form-group textarea {
             resize: vertical;
             min-height: 100px;
-            padding-right: 20px; /* لا نحتاج أيقونة داخل الملاحظات */
+            padding-right: 20px;
         }
 
         .form-group input:focus, 
@@ -377,16 +377,22 @@
             box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
         }
 
-        /* تصميم الأزرار التفاعلية (Radio & Checkbox Pills) */
+        /* تصميم الأزرار التفاعلية والمربعات داخل التسجيل */
         .pill-group {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
+        
+        .pill-group.subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
 
         .pill-group input[type="radio"],
         .pill-group input[type="checkbox"] {
-            display: none; /* إخفاء الدائرة الافتراضية */
+            display: none;
         }
 
         .pill-group label {
@@ -402,20 +408,41 @@
             user-select: none;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+        }
+        
+        /* تنسيق المربعات الخاصة باختيار المواد في التسجيل */
+        .pill-group.subjects-grid label {
+            border-radius: 15px;
+            aspect-ratio: 1 / 1;
+            flex-direction: column;
+            gap: 15px;
+            font-size: 1.2rem;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .pill-group.subjects-grid label i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            transition: var(--transition);
         }
 
         .pill-group label:hover {
             background-color: #e4e4e4;
         }
 
-        /* عند اختيار الزر */
         .pill-group input[type="radio"]:checked + label,
         .pill-group input[type="checkbox"]:checked + label {
             background-color: var(--accent);
             color: var(--white);
             border-color: var(--accent);
             box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+        }
+        
+        .pill-group.subjects-grid input:checked + label i {
+            color: var(--white);
         }
 
         .submit-btn {
@@ -520,11 +547,19 @@
             .contact-links { flex-direction: column; gap: 15px; }
             .contact-btn { width: 100%; justify-content: center; }
         }
+        
+        /* توافق المربعات مع الشاشات الصغيرة جداً */
         @media (max-width: 500px) {
-            .features-grid { grid-template-columns: 1fr; }
-            .feature-card { aspect-ratio: auto; min-height: 250px; }
-            .pill-group { flex-direction: column; }
-            .pill-group label { justify-content: center; text-align: center; }
+            /* إبقاء المربعات كعمودين في الجوال للمواد الدراسية وقسم التسجيل إذا كانت صغيرة، أو جعلها عمود واحد حسب الرغبة */
+            /* جعلناها هنا عمودين أيضاً في الجوال لتبقى شكل المربعات جميلاً */
+            .features-grid, .pill-group.subjects-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 10px;
+            }
+            .feature-card { padding: 1rem; }
+            .feature-card h3, .pill-group.subjects-grid label { font-size: 1.1rem; }
+            .feature-icon, .pill-group.subjects-grid label i { font-size: 2rem; }
+            .pill-group:not(.subjects-grid) { flex-direction: column; }
         }
     </style>
 </head>
@@ -588,7 +623,6 @@
         </div>
     </section>
 
-    <!-- ================= القسم الجديد المعدل للتسجيل ================= -->
     <section id="booking" class="booking-section reveal">
         <div class="booking-container">
             <h2>نموذج التسجيل في الدروس</h2>
@@ -648,13 +682,13 @@
                         </select>
                     </div>
 
-                    <!-- القسم الثاني: المواد المطلوبة -->
+                    <!-- القسم الثاني: المواد المطلوبة (بشكل مربعات) -->
                     <div class="form-section-title full-width" style="margin-top: 15px;">
                         <i class="fas fa-book"></i> ثانياً: المواد المطلوبة (يمكنك اختيار أكثر من مادة)
                     </div>
 
                     <div class="form-group full-width">
-                        <div class="pill-group">
+                        <div class="pill-group subjects-grid">
                             <input type="checkbox" id="subMath" name="المواد[]" value="رياضيات">
                             <label for="subMath"><i class="fas fa-square-root-variable"></i> رياضيات</label>
                             
@@ -690,7 +724,6 @@
             </form>
         </div>
     </section>
-    <!-- ================= نهاية قسم التسجيل ================= -->
 
     <footer>
         <p class="location"><i class="fas fa-map-marker-alt"></i> الموقع: حي الميدان - منزل والد عبد الحيدر العمور</p>
