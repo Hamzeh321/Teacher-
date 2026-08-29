@@ -10,8 +10,8 @@
     <style>
         /* ================= المتغيرات والإعدادات العامة ================= */
         :root {
-            --primary: #2c1e4a; /* لون داكن أنيق يتناسب مع الإعلانات التعليمية */
-            --accent: #d4af37; /* لون ذهبي */
+            --primary: #2c1e4a;
+            --accent: #d4af37;
             --light-bg: #fdfaf6;
             --white: #ffffff;
             --text-dark: #333;
@@ -202,7 +202,7 @@
         .profile-img {
             width: clamp(280px, 40vw, 400px);
             height: clamp(280px, 40vw, 400px);
-            border-radius: 20px; /* جعلها مربعة بحواف دائرية تناسب الإعلانات */
+            border-radius: 20px; 
             object-fit: cover;
             border: 8px solid var(--white);
             box-shadow: 0 0 0 5px var(--accent), 0 20px 40px rgba(0,0,0,0.15);
@@ -213,7 +213,7 @@
             transform: scale(1.03) rotate(2deg);
         }
 
-        /* ================= قسم المواد الدراسية (Subjects) ================= */
+        /* ================= قسم المواد الدراسية ================= */
         .features {
             padding: 5rem 5%;
             text-align: center;
@@ -284,7 +284,7 @@
             font-weight: 600;
         }
 
-        /* ================= قسم التسجيل (Booking) ================= */
+        /* ================= قسم التسجيل ================= */
         .booking-section {
             background: linear-gradient(135deg, var(--primary) 0%, #170f26 100%);
             padding: 6rem 5%;
@@ -318,7 +318,6 @@
             color: #666;
         }
 
-        /* شبكة الحقول لجعلها في عمودين بالشاشات الكبيرة */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -445,7 +444,7 @@
             align-items: center;
             gap: 10px;
             background-color: rgba(255,255,255,0.1);
-            padding: 10px 25px;
+            padding: 12px 25px;
             border-radius: 50px;
             color: var(--white);
             text-decoration: none;
@@ -455,12 +454,12 @@
             direction: ltr;
         }
 
-        .contact-btn i.fa-facebook-messenger {
+        .contact-btn.messenger-btn i {
             color: #00B2FF;
             font-size: 1.5rem;
         }
         
-        .contact-btn i.fa-telegram {
+        .contact-btn.telegram-btn i {
             color: #229ED9;
             font-size: 1.5rem;
         }
@@ -537,6 +536,15 @@
             .form-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .contact-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .contact-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -570,7 +578,6 @@
             <a href="#booking" class="btn"> احجز مقعداً الآن <i class="fas fa-pen-nib"></i></a>
         </div>
         <div class="hero-image">
-            <!-- يمكنك استبدال الرابط أدناه برابط صورة الإعلان الخاص بك -->
             <img src="https://via.placeholder.com/500x500.png?text=صورة+الإعلان+هنا" alt="إعلان التدريس الخصوصي" class="profile-img">
         </div>
     </section>
@@ -606,7 +613,6 @@
             <h2>نموذج التسجيل في الدروس</h2>
             <p>نرحب بأولياء الأمور والطلاب.. يرجى تعبئة البيانات أدناه للتسجيل</p>
             
-            <!-- تم ترك رابط Formsubmit الخاص بك كما هو -->
             <form id="booking-form" action="https://formsubmit.co/ajax/26589abe74412f3c72f72d6588c37b52" method="POST">
                 <input type="hidden" name="_subject" value="طلب تسجيل جديد - أ. بتول عبد العمور">
                 <input type="hidden" name="_captcha" value="false">
@@ -675,11 +681,17 @@
 
     <footer>
         <p class="location"><i class="fas fa-map-marker-alt"></i> الموقع: حي الميدان - منزل والد عبد الحيدر العمور</p>
-        <p>للتواصل والاستفسار عبر الرسائل:</p>
+        <p>للتواصل والاستفسار عبر الرسائل المباشرة:</p>
         
         <div class="contact-links">
-            <a href="https://m.me/BatoolAlAmour" target="_blank" class="contact-btn">
-                <i class="fab fa-facebook-messenger"></i> Batool AlAmour <i class="fab fa-telegram"></i>
+            <!-- تم تفعيل الرابط المباشر للماسنجر هنا -->
+            <a href="https://m.me/Batool.alomour.12" target="_blank" class="contact-btn messenger-btn">
+                <i class="fab fa-facebook-messenger"></i> Batool Amour
+            </a>
+            
+            <!-- اترك رابط التليجرام كما هو أو قم بتعديله إن توفر -->
+            <a href="رابط_التليجرام_هنا" target="_blank" class="contact-btn telegram-btn">
+                <i class="fab fa-telegram"></i> Batool Amour
             </a>
         </div>
         
@@ -687,14 +699,12 @@
     </footer>
 
     <script>
-        // 1. تفعيل وإغلاق قائمة الهاتف
         const mobileMenu = document.getElementById('mobile-menu');
         const navLinks = document.getElementById('nav-links');
         const menuIcon = mobileMenu.querySelector('i');
 
         mobileMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            // تغيير أيقونة القائمة عند الفتح والإغلاق
             if (navLinks.classList.contains('active')) {
                 menuIcon.classList.remove('fa-bars');
                 menuIcon.classList.add('fa-times');
@@ -704,7 +714,6 @@
             }
         });
 
-        // إغلاق القائمة عند النقر على أي رابط داخلها
         const navItems = document.querySelectorAll('.nav-links a');
         navItems.forEach(item => {
             item.addEventListener('click', () => {
@@ -714,7 +723,6 @@
             });
         });
 
-        // 2. حركة ظهور العناصر عند التمرير (Scroll Reveal)
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -727,7 +735,7 @@
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal(); // تشغيلها مرة عند تحميل الصفحة
+        reveal();
     </script>
 </body>
 </html>
