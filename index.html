@@ -104,10 +104,6 @@
             transition: var(--transition);
         }
 
-        .menu-toggle:hover {
-            color: var(--accent);
-        }
-
         /* ================= القسم الرئيسي (Hero Section) ================= */
         .hero {
             display: flex;
@@ -188,9 +184,7 @@
             box-shadow: 0 12px 25px rgba(212, 175, 55, 0.4);
         }
 
-        .btn i {
-            margin-left: 10px;
-        }
+        .btn i { margin-left: 10px; }
 
         .hero-image {
             flex: 1;
@@ -242,17 +236,24 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 2rem;
+            max-width: 800px; 
+            margin: 0 auto; 
         }
 
         .feature-card {
             background: var(--light-bg);
-            padding: 2.5rem 2rem;
+            padding: 2.5rem 1.5rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
             transition: var(--transition);
             border-bottom: 6px solid transparent;
+            aspect-ratio: 1 / 1; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .feature-card:hover {
@@ -269,22 +270,11 @@
             transition: var(--transition);
         }
 
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1);
-        }
+        .feature-card:hover .feature-icon { transform: scale(1.1); }
+        .feature-card h3 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.8rem; }
+        .feature-card p { color: #666; font-weight: 600; font-size: 1.1rem; }
 
-        .feature-card h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
-        }
-        
-        .feature-card p {
-            color: #666;
-            font-weight: 600;
-        }
-
-        /* ================= قسم التسجيل ================= */
+        /* ================= قسم التسجيل الحديث (التصميم الجديد) ================= */
         .booking-section {
             background: linear-gradient(135deg, var(--primary) 0%, #170f26 100%);
             padding: 6rem 5%;
@@ -299,16 +289,13 @@
             border-radius: 30px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.4);
             width: 100%;
-            max-width: 750px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            max-width: 800px; /* توسيع النموذج قليلاً */
         }
 
         .booking-container h2 {
             text-align: center;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             font-size: 2.2rem;
         }
         
@@ -316,24 +303,33 @@
             text-align: center;
             margin-bottom: 2.5rem;
             color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* فواصل الأقسام داخل النموذج */
+        .form-section-title {
+            width: 100%;
+            font-size: 1.2rem;
+            color: var(--accent);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+            margin: 25px 0 20px 0;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0 1.5rem;
+            gap: 1.5rem;
         }
 
-        .form-group {
-            margin-bottom: 1.8rem;
-            position: relative;
-        }
+        .form-group { position: relative; }
+        .form-group.full-width { grid-column: 1 / -1; }
 
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-
-        .form-group i {
+        .form-group i.input-icon {
             position: absolute;
             right: 18px;
             top: 45px;
@@ -342,25 +338,24 @@
             transition: var(--transition);
         }
 
-        .form-group:focus-within i {
-            color: var(--accent);
-        }
+        .form-group:focus-within i.input-icon { color: var(--accent); }
 
-        .form-group label {
+        .form-group label.main-label {
             display: block;
             margin-bottom: 10px;
             font-weight: 700;
             color: var(--primary);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
         }
 
-        .form-group input, 
+        .form-group input[type="text"], 
+        .form-group input[type="tel"], 
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 16px 50px 16px 20px; 
+            padding: 14px 45px 14px 20px; 
             border: 2px solid #e0e0e0;
-            border-radius: 15px;
+            border-radius: 12px;
             font-family: 'Cairo', sans-serif;
             font-size: 1.05rem;
             transition: var(--transition);
@@ -370,6 +365,7 @@
         .form-group textarea {
             resize: vertical;
             min-height: 100px;
+            padding-right: 20px; /* لا نحتاج أيقونة داخل الملاحظات */
         }
 
         .form-group input:focus, 
@@ -379,6 +375,47 @@
             background-color: var(--white);
             outline: none;
             box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+        }
+
+        /* تصميم الأزرار التفاعلية (Radio & Checkbox Pills) */
+        .pill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pill-group input[type="radio"],
+        .pill-group input[type="checkbox"] {
+            display: none; /* إخفاء الدائرة الافتراضية */
+        }
+
+        .pill-group label {
+            background-color: #f0f0f0;
+            color: #555;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pill-group label:hover {
+            background-color: #e4e4e4;
+        }
+
+        /* عند اختيار الزر */
+        .pill-group input[type="radio"]:checked + label,
+        .pill-group input[type="checkbox"]:checked + label {
+            background-color: var(--accent);
+            color: var(--white);
+            border-color: var(--accent);
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
         }
 
         .submit-btn {
@@ -393,21 +430,17 @@
             cursor: pointer;
             transition: var(--transition);
             font-family: 'Cairo', sans-serif;
-            margin-top: 10px;
+            margin-top: 25px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
         }
 
-        .submit-btn:hover:not(:disabled) {
+        .submit-btn:hover {
             background-color: #b5952f;
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .submit-btn:active:not(:disabled) {
-            transform: scale(0.98);
         }
 
         /* ================= الفوتر ================= */
@@ -418,10 +451,7 @@
             color: var(--white);
         }
 
-        footer p {
-            margin-bottom: 12px;
-            font-size: 1.1rem;
-        }
+        footer p { margin-bottom: 12px; font-size: 1.1rem; }
         
         .location {
             color: var(--accent);
@@ -454,15 +484,8 @@
             direction: ltr;
         }
 
-        .contact-btn.messenger-btn i {
-            color: #00B2FF;
-            font-size: 1.5rem;
-        }
-        
-        .contact-btn.telegram-btn i {
-            color: #229ED9;
-            font-size: 1.5rem;
-        }
+        .contact-btn.messenger-btn i { color: #00B2FF; font-size: 1.5rem; }
+        .contact-btn.telegram-btn i { color: #229ED9; font-size: 1.5rem; }
 
         .contact-btn:hover {
             background-color: rgba(255,255,255,0.2);
@@ -475,76 +498,33 @@
             transform: translateY(40px);
             transition: all 0.8s ease-out;
         }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* ================= التوافق مع الشاشات الصغيرة ================= */
         @media (max-width: 768px) {
-            .hero {
-                text-align: center;
-                padding: 4rem 5%;
-                gap: 2rem;
-            }
-            
-            .qualifications {
-                text-align: right;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-
+            .hero { text-align: center; padding: 4rem 5%; gap: 2rem; }
+            .qualifications { text-align: right; }
+            .menu-toggle { display: block; }
             .nav-links {
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                max-height: 0;
-                overflow: hidden;
-                padding: 0;
-                gap: 0;
+                flex-direction: column; position: absolute; top: 100%; left: 0;
+                width: 100%; background-color: var(--primary); max-height: 0;
+                overflow: hidden; padding: 0; gap: 0;
                 border-top: 1px solid rgba(255,255,255,0.1);
             }
-
-            .nav-links.active {
-                max-height: 300px;
-            }
-
-            .nav-links li {
-                text-align: center;
-            }
-
-            .nav-links a {
-                display: block;
-                padding: 15px 0;
-                border-bottom: 1px solid rgba(255,255,255,0.05);
-            }
-
-            .nav-links a::after {
-                display: none; 
-            }
-
-            .booking-container {
-                padding: 2rem 1.5rem;
-            }
-            
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-links {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .contact-btn {
-                width: 100%;
-                justify-content: center;
-            }
+            .nav-links.active { max-height: 300px; }
+            .nav-links li { text-align: center; }
+            .nav-links a { display: block; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+            .nav-links a::after { display: none; }
+            .booking-container { padding: 2.5rem 1.5rem; }
+            .form-grid { grid-template-columns: 1fr; gap: 1rem;}
+            .contact-links { flex-direction: column; gap: 15px; }
+            .contact-btn { width: 100%; justify-content: center; }
+        }
+        @media (max-width: 500px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .feature-card { aspect-ratio: auto; min-height: 250px; }
+            .pill-group { flex-direction: column; }
+            .pill-group label { justify-content: center; text-align: center; }
         }
     </style>
 </head>
@@ -608,10 +588,11 @@
         </div>
     </section>
 
+    <!-- ================= القسم الجديد المعدل للتسجيل ================= -->
     <section id="booking" class="booking-section reveal">
         <div class="booking-container">
             <h2>نموذج التسجيل في الدروس</h2>
-            <p>نرحب بأولياء الأمور والطلاب.. يرجى تعبئة البيانات أدناه للتسجيل</p>
+            <p>نرحب بكم.. يرجى تعبئة البيانات بخطوات بسيطة للتسجيل</p>
             
             <form id="booking-form" action="https://formsubmit.co/ajax/26589abe74412f3c72f72d6588c37b52" method="POST">
                 <input type="hidden" name="_subject" value="طلب تسجيل جديد - أ. بتول عبد العمور">
@@ -619,77 +600,107 @@
                 <input type="hidden" name="_template" value="table">
                 
                 <div class="form-grid">
+                    
+                    <!-- القسم الأول: بيانات الطالب -->
+                    <div class="form-section-title full-width">
+                        <i class="fas fa-user-graduate"></i> أولاً: بيانات الطالب
+                    </div>
+
                     <div class="form-group full-width">
-                        <label for="studentName">اسم الطالب (الرباعي):</label>
-                        <i class="fas fa-user"></i>
+                        <label class="main-label" for="studentName">اسم الطالب (الرباعي):</label>
+                        <i class="fas fa-user input-icon"></i>
                         <input type="text" id="studentName" name="اسم_الطالب" required placeholder="أدخل الاسم الكامل">
                     </div>
 
                     <div class="form-group">
-                        <label for="phoneNumber">رقم هاتف ولي الأمر:</label>
-                        <i class="fas fa-phone"></i>
-                        <input type="tel" id="phoneNumber" name="رقم_الهاتف" required placeholder="مثال: 079XXXXXXX">
+                        <label class="main-label">جنس الطالب:</label>
+                        <div class="pill-group">
+                            <input type="radio" id="genderMale" name="الجنس" value="ذكر" required>
+                            <label for="genderMale"><i class="fas fa-male"></i> ذكر</label>
+                            
+                            <input type="radio" id="genderFemale" name="الجنس" value="أنثى" required>
+                            <label for="genderFemale"><i class="fas fa-female"></i> أنثى</label>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="gender">جنس الطالب:</label>
-                        <i class="fas fa-venus-mars"></i>
-                        <select id="gender" name="الجنس" required>
-                            <option value="" disabled selected>اختر الجنس...</option>
-                            <option value="ذكر">ذكر</option>
-                            <option value="أنثى">أنثى</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="grade">الصف الدراسي:</label>
-                        <i class="fas fa-graduation-cap"></i>
+                        <label class="main-label" for="grade">الصف الدراسي:</label>
+                        <i class="fas fa-graduation-cap input-icon"></i>
                         <select id="grade" name="الصف" required>
                             <option value="" disabled selected>اختر الصف...</option>
-                            <option value="الصفوف التأسيسية (الأول - الثالث)">الصفوف التأسيسية (الأول - الثالث)</option>
-                            <option value="الصفوف الأساسية (الرابع - السادس)">الصفوف الأساسية (الرابع - السادس)</option>
-                            <option value="الصفوف المتوسطة (السابع - التاسع)">الصفوف المتوسطة (السابع - التاسع)</option>
+                            <option value="الصفوف التأسيسية (الأول - الثالث)">الصفوف التأسيسية (1 - 3)</option>
+                            <option value="الصفوف الأساسية (الرابع - السادس)">الصفوف الأساسية (4 - 6)</option>
+                            <option value="الصفوف المتوسطة (السابع - التاسع)">الصفوف المتوسطة (7 - 9)</option>
                             <option value="الصف العاشر">الصف العاشر</option>
                             <option value="الأول ثانوي">الأول ثانوي</option>
                             <option value="التوجيهي (الثاني عشر)">التوجيهي (الثاني عشر)</option>
-                            <option value="مراحل متعددة">مراحل متعددة (في حال تسجيل أكثر من ابن)</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="childrenCount">عدد الأبناء المراد تسجيلهم:</label>
-                        <i class="fas fa-users"></i>
+                        <label class="main-label" for="childrenCount">عدد الأبناء المراد تسجيلهم:</label>
+                        <i class="fas fa-users input-icon"></i>
                         <select id="childrenCount" name="عدد_الأبناء" required>
-                            <option value="1">طالب واحد</option>
+                            <option value="1" selected>طالب واحد</option>
                             <option value="2">طالبين</option>
                             <option value="3">3 طلاب</option>
                             <option value="4+">4 طلاب أو أكثر</option>
                         </select>
                     </div>
 
+                    <!-- القسم الثاني: المواد المطلوبة -->
+                    <div class="form-section-title full-width" style="margin-top: 15px;">
+                        <i class="fas fa-book"></i> ثانياً: المواد المطلوبة (يمكنك اختيار أكثر من مادة)
+                    </div>
+
                     <div class="form-group full-width">
-                        <label for="notes">ملاحظات إضافية (اختياري):</label>
-                        <i class="fas fa-comment-dots"></i>
-                        <textarea id="notes" name="ملاحظات" placeholder="أضف هنا أي ملاحظات، استفسارات، أو المواد المراد التركيز عليها..."></textarea>
+                        <div class="pill-group">
+                            <input type="checkbox" id="subMath" name="المواد[]" value="رياضيات">
+                            <label for="subMath"><i class="fas fa-square-root-variable"></i> رياضيات</label>
+                            
+                            <input type="checkbox" id="subEnglish" name="المواد[]" value="إنجليزي">
+                            <label for="subEnglish"><i class="fas fa-language"></i> إنجليزي</label>
+                            
+                            <input type="checkbox" id="subArabic" name="المواد[]" value="عربي">
+                            <label for="subArabic"><i class="fas fa-book-quran"></i> عربي</label>
+                            
+                            <input type="checkbox" id="subScience" name="المواد[]" value="علوم">
+                            <label for="subScience"><i class="fas fa-flask"></i> علوم</label>
+                        </div>
+                    </div>
+
+                    <!-- القسم الثالث: التواصل والملاحظات -->
+                    <div class="form-section-title full-width" style="margin-top: 15px;">
+                        <i class="fas fa-phone-alt"></i> ثالثاً: معلومات التواصل
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="main-label" for="phoneNumber">رقم هاتف ولي الأمر (للتواصل):</label>
+                        <i class="fas fa-phone input-icon"></i>
+                        <input type="tel" id="phoneNumber" name="رقم_الهاتف" required placeholder="مثال: 079XXXXXXX">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="main-label" for="notes">ملاحظات إضافية (اختياري):</label>
+                        <textarea id="notes" name="ملاحظات" placeholder="أضف هنا أي ملاحظات، أو نقاط ضعف ترغب بالتركيز عليها للطالب..."></textarea>
                     </div>
                 </div>
 
-                <button type="submit" class="submit-btn" id="submit-btn">تأكيد التسجيل <i class="fas fa-paper-plane"></i></button>
+                <button type="submit" class="submit-btn" id="submit-btn">تأكيد التسجيل وإرسال الطلب <i class="fas fa-paper-plane"></i></button>
             </form>
         </div>
     </section>
+    <!-- ================= نهاية قسم التسجيل ================= -->
 
     <footer>
         <p class="location"><i class="fas fa-map-marker-alt"></i> الموقع: حي الميدان - منزل والد عبد الحيدر العمور</p>
         <p>للتواصل والاستفسار عبر الرسائل المباشرة:</p>
         
         <div class="contact-links">
-            <!-- تم تفعيل الرابط المباشر للماسنجر هنا -->
             <a href="https://m.me/Batool.alomour.12" target="_blank" class="contact-btn messenger-btn">
                 <i class="fab fa-facebook-messenger"></i> Batool Amour
             </a>
             
-            <!-- اترك رابط التليجرام كما هو أو قم بتعديله إن توفر -->
             <a href="رابط_التليجرام_هنا" target="_blank" class="contact-btn telegram-btn">
                 <i class="fab fa-telegram"></i> Batool Amour
             </a>
