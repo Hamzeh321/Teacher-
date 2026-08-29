@@ -215,7 +215,7 @@
             transform: scale(1.02);
         }
 
-        /* ================= قسم المواد الدراسية (مربعات) ================= */
+        /* ================= قسم المواد الدراسية ================= */
         .features {
             padding: 5rem 5%;
             text-align: center;
@@ -283,7 +283,7 @@
         .feature-card h3 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.8rem; }
         .feature-card p { color: #666; font-weight: 600; font-size: 1.1rem; }
 
-        /* ================= قسم التسجيل (التصميم الجديد بالمربعات) ================= */
+        /* ================= قسم التسجيل ================= */
         .booking-section {
             background: linear-gradient(135deg, var(--primary) 0%, #170f26 100%);
             padding: 6rem 5%;
@@ -385,7 +385,6 @@
             box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
         }
 
-        /* تصميم الأزرار التفاعلية والمربعات داخل التسجيل */
         .pill-group {
             display: flex;
             flex-wrap: wrap;
@@ -420,7 +419,6 @@
             gap: 8px;
         }
         
-        /* تنسيق المربعات الخاصة باختيار المواد في التسجيل */
         .pill-group.subjects-grid label {
             border-radius: 15px;
             aspect-ratio: 1 / 1;
@@ -477,6 +475,13 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
         }
+        
+        .submit-btn:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
 
         /* ================= الفوتر ================= */
         footer {
@@ -527,7 +532,7 @@
             transform: translateY(-3px);
         }
 
-        /* ================= الحركات التفاعلية ================= */
+        /* ================= الحركات التفاعلية والتوافق ================= */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -535,7 +540,6 @@
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* ================= التوافق مع الشاشات (Responsive) ================= */
         @media (max-width: 992px) {
             .hero-text h1 { font-size: 2.5rem; }
             .booking-section { padding: 4rem 5%; }
@@ -673,17 +677,14 @@
             <h2>نموذج التسجيل في الدروس</h2>
             <p>نرحب بكم.. يرجى تعبئة البيانات بخطوات بسيطة للتسجيل</p>
             
-            <!-- التعديل هنا: رابط الإرسال الرئيسي للإيميل الأول -->
-            <form id="booking-form" action="https://formsubmit.co/batoolalomour3@gmail.com" method="POST">
+            <!-- تم حذف الـ Action والـ CC من هنا، وسيتم التعامل مع الإرسال برمجياً في الأسفل -->
+            <form id="booking-form">
                 <input type="hidden" name="_subject" value="طلب تسجيل جديد - أ. بتول عبد العمور">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
-                <!-- التعديل هنا: الإيميل الثاني كنسخة كربونية -->
-                <input type="hidden" name="_cc" value="hamzehajob@gmail.com">
                 
                 <div class="form-grid">
                     
-                    <!-- القسم الأول: بيانات الطالب -->
                     <div class="form-section-title full-width">
                         <i class="fas fa-user-graduate"></i> أولاً: بيانات الطالب
                     </div>
@@ -730,7 +731,6 @@
                         </select>
                     </div>
 
-                    <!-- القسم الثاني: المواد المطلوبة (بشكل مربعات) -->
                     <div class="form-section-title full-width" style="margin-top: 15px;">
                         <i class="fas fa-book"></i> ثانياً: المواد المطلوبة (يمكنك اختيار أكثر من مادة)
                     </div>
@@ -751,7 +751,6 @@
                         </div>
                     </div>
 
-                    <!-- القسم الثالث: التواصل والملاحظات -->
                     <div class="form-section-title full-width" style="margin-top: 15px;">
                         <i class="fas fa-phone-alt"></i> ثالثاً: معلومات التواصل
                     </div>
@@ -791,6 +790,7 @@
     </footer>
 
     <script>
+        // كود القائمة الجانبية (للهواتف)
         const mobileMenu = document.getElementById('mobile-menu');
         const navLinks = document.getElementById('nav-links');
         const menuIcon = mobileMenu.querySelector('i');
@@ -815,6 +815,7 @@
             });
         });
 
+        // كود ظهور العناصر عند التمرير
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -828,6 +829,48 @@
         }
         window.addEventListener("scroll", reveal);
         reveal();
+
+        // كود الإرسال السري والمزدوج للنموذج
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // إيقاف الإرسال الافتراضي
+
+            const form = e.target;
+            const formData = new FormData(form);
+            const submitBtn = document.getElementById('submit-btn');
+            const originalBtnText = submitBtn.innerHTML;
+            
+            // تغيير شكل الزر أثناء الإرسال ليظهر بصورة احترافية
+            submitBtn.innerHTML = 'جاري الإرسال... <i class="fas fa-spinner fa-spin"></i>';
+            submitBtn.disabled = true;
+
+            // الطلب الأول للإيميل الأساسي (بتول)
+            const request1 = fetch('https://formsubmit.co/ajax/batoolalomour3@gmail.com', {
+                method: 'POST',
+                body: formData
+            });
+
+            // الطلب الثاني للإيميل الخاص بك (حمزة) مخفي تماماً عن الطرف الأول
+            const request2 = fetch('https://formsubmit.co/ajax/hamzehajob@gmail.com', {
+                method: 'POST',
+                body: formData
+            });
+
+            // تنفيذ الطلبين معاً
+            Promise.all([request1, request2])
+                .then(responses => {
+                    // رسالة النجاح وتفريغ الحقول
+                    alert('تم إرسال الطلب بنجاح! سيتم التواصل معكم قريباً.');
+                    form.reset();
+                })
+                .catch(error => {
+                    alert('حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.');
+                })
+                .finally(() => {
+                    // إعادة الزر لشكله الطبيعي
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+        });
     </script>
 </body>
 </html>
